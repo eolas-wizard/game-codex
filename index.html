@@ -1,1 +1,80 @@
-<!doctype html><html><head><meta charset='utf-8'><title>Eolas Companion</title></head><body><h1>Eolas Companion</h1></body></html>
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta
+    name="description"
+    content="Eolas Companion — an offline-first Palworld codex for modern completionists."
+  >
+  <meta name="theme-color" content="#111714">
+
+  <title>Eolas Companion</title>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="./css/components.css">
+
+  <script type="module" src="./js/app.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#app-view">Skip to content</a>
+
+  <div class="app-frame">
+    <header class="topbar">
+      <button
+        class="brand-button"
+        type="button"
+        data-route="home"
+        aria-label="Open Eolas home"
+      >
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span>
+          <span class="brand-name">Eolas</span>
+          <span class="brand-product">Palworld Companion</span>
+        </span>
+      </button>
+
+      <div class="status-pill" id="connection-status" role="status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Checking</span>
+      </div>
+    </header>
+
+    <main id="app-view" class="app-view" tabindex="-1"></main>
+
+    <nav class="bottom-nav" aria-label="Primary navigation">
+      <button class="nav-item" type="button" data-route="home">
+        <span class="nav-icon" aria-hidden="true">⌂</span>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" type="button" data-route="paldex">
+        <span class="nav-icon" aria-hidden="true">◉</span>
+        <span>Paldex</span>
+      </button>
+      <button class="nav-item" type="button" data-route="regions">
+        <span class="nav-icon" aria-hidden="true">◇</span>
+        <span>Regions</span>
+      </button>
+      <button class="nav-item" type="button" data-route="bases">
+        <span class="nav-icon" aria-hidden="true">⌂</span>
+        <span>Bases</span>
+      </button>
+      <button class="nav-item" type="button" data-route="settings">
+        <span class="nav-icon" aria-hidden="true">⚙</span>
+        <span>Settings</span>
+      </button>
+    </nav>
+  </div>
+
+  <noscript>
+    <div class="noscript-message">
+      Eolas Companion requires JavaScript to run.
+    </div>
+  </noscript>
+</body>
+</html>
