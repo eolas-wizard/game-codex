@@ -1,4 +1,4 @@
-const CACHE_NAME = "eolas-iteration-03-v2";
+const CACHE_NAME = "eolas-iteration-04-v1";
 const APP_SHELL = [
   "./", "./index.html", "./manifest.webmanifest",
   "./css/tokens.css", "./css/app.css", "./css/components.css",
@@ -7,7 +7,8 @@ const APP_SHELL = [
   "./js/modules/home.js", "./js/modules/regions.js",
   "./js/modules/paldex.js", "./js/modules/bases.js", "./js/modules/settings.js",
   "./data/games/palworld/game.json", "./data/games/palworld/regions.json",
-  "./data/games/palworld/pals.json"
+  "./data/games/palworld/pals.json",
+  "./assets/images/eolas-design-approved.png"
 ];
 
 self.addEventListener("install", event => {
