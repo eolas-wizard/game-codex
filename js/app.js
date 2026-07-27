@@ -1,42 +1,47 @@
 import { createRouter } from "./core/router.js";
-import { readSetting } from "./core/storage.js";
+import { getState } from "./core/state.js";
+import { getRegion } from "./core/regions.js";
 import { homeModule } from "./modules/home.js";
-import { paldexModule } from "./modules/paldex.js";
 import { regionsModule } from "./modules/regions.js";
+import { paldexModule } from "./modules/paldex.js";
 import { basesModule } from "./modules/bases.js";
 import { settingsModule } from "./modules/settings.js";
 
-const APP_VERSION = "0.1.0";
-
 const routes = {
   home: homeModule,
-  paldex: paldexModule,
   regions: regionsModule,
+  paldex: paldexModule,
   bases: basesModule,
   settings: settingsModule
 };
 
-function applySavedTheme() {
-  const savedTheme = readSetting("theme", "dark");
-  document.documentElement.dataset.theme =
-    savedTheme === "light" ? "light" : "dark";
+function applyAppearance() {
+  const state = getState();
+  document.documentElement.dataset.mode = state.mode;
+  document.documentElement.dataset.region = state.activeRegion;
+  updateRegionLabel();
+}
+
+function updateRegionLabel() {
+  const label = document.querySelector("#active-region-label");
+  if (!label) return;
+
+  label.textContent = getRegion(getState().activeRegion).name;
 }
 
 function updateNavigation(route) {
   document.querySelectorAll("[data-route]").forEach((button) => {
-    const isCurrent = button.dataset.route === route;
+    const current = button.dataset.route === route;
 
-    if (button.classList.contains("nav-item")) {
-      if (isCurrent) {
-        button.setAttribute("aria-current", "page");
-      } else {
-        button.removeAttribute("aria-current");
-      }
+    if (current) {
+      button.setAttribute("aria-current", "page");
+    } else {
+      button.removeAttribute("aria-current");
     }
   });
 }
 
-function bindGlobalNavigation(router) {
+function bindNavigation(router) {
   document.querySelectorAll("[data-route]").forEach((button) => {
     button.addEventListener("click", () => router.navigate(button.dataset.route));
   });
@@ -45,11 +50,7 @@ function bindGlobalNavigation(router) {
 function updateConnectionStatus() {
   const status = document.querySelector("#connection-status");
   if (!status) return;
-
-  const online = navigator.onLine;
-  status.dataset.online = String(online);
-  status.querySelector("span:last-child").textContent =
-    online ? "Online" : "Offline";
+  status.textContent = navigator.onLine ? "Online" : "Offline";
 }
 
 async function registerServiceWorker() {
@@ -63,24 +64,23 @@ async function registerServiceWorker() {
 }
 
 function initialize() {
-  applySavedTheme();
+  applyAppearance();
 
-  const outlet = document.querySelector("#app-view");
   const router = createRouter({
     routes,
-    outlet,
+    outlet: document.querySelector("#app-view"),
     onRouteChange: updateNavigation
   });
 
-  bindGlobalNavigation(router);
+  bindNavigation(router);
   router.start();
 
   updateConnectionStatus();
   window.addEventListener("online", updateConnectionStatus);
   window.addEventListener("offline", updateConnectionStatus);
+  document.addEventListener("eolas:region-changed", updateRegionLabel);
 
   registerServiceWorker();
-  console.info(`Eolas Companion ${APP_VERSION} initialized.`);
 }
 
 document.addEventListener("DOMContentLoaded", initialize);
