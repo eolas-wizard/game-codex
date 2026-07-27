@@ -2,8 +2,8 @@
   "id": "palworld",
   "name": "Palworld",
   "companionName": "Eolas Companion",
-  "appVersion": "0.3.0",
-  "dataVersion": "0.3.0",
+  "appVersion": "0.4.0",
+  "dataVersion": "0.4.0",
   "experience": "field-journal",
   "features": {
     "journal": true,
