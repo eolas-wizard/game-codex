@@ -63,3 +63,41 @@
   .status-card:last-child { border-bottom:0; }
   .journal-cover::after { display:none; }
 }
+
+/* Iteration 05: playable region guide */
+.compact-header { margin-bottom: 1rem; }
+.guide-meta-line { display:flex; flex-wrap:wrap; gap:.45rem 1rem; margin-top:.8rem; color:var(--ink-muted); font-size:.75rem; }
+.guide-meta-line span + span::before { content:"·"; margin-right:1rem; color:var(--accent); }
+.region-theme-strip { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.8rem 0; border-block:1px solid var(--line-soft); }
+.region-theme-strip div { display:flex; flex-direction:column; }
+.region-theme-strip span { color:var(--accent); font-size:.8rem; }
+.region-theme-strip select { max-width:14rem; }
+.chapter-jump { display:flex; gap:.35rem; overflow:auto; padding:.75rem 0; border-bottom:1px solid var(--line-soft); scrollbar-width:none; }
+.chapter-jump a { flex:0 0 auto; padding:.42rem .65rem; color:var(--ink-muted); text-decoration:none; border:1px solid var(--line-soft); border-radius:.35rem; font-size:.72rem; font-weight:800; }
+.chapter-jump a:hover,.chapter-jump a:focus-visible { color:var(--accent-strong); border-color:var(--accent); }
+.guide-section { scroll-margin-top:1rem; }
+.guide-table { border-top:1px solid var(--line); }
+.guide-table-row { display:grid; gap:.45rem; padding:.8rem 0; border-bottom:1px solid var(--line-soft); }
+.guide-table-row div { display:flex; justify-content:space-between; gap:1rem; }
+.guide-table-row strong { font-family:var(--font-display); }
+.guide-table-row span { color:var(--accent); font-size:.72rem; text-align:right; }
+.guide-table-row p { margin:0; color:var(--ink-muted); font-size:.8rem; line-height:1.55; }
+.objective-list { border-top:1px solid var(--line); }
+.objective-row { display:flex; gap:.7rem; align-items:flex-start; padding:.7rem 0; border-bottom:1px solid var(--line-soft); cursor:pointer; }
+.objective-row input { margin-top:.15rem; accent-color:var(--accent); }
+.objective-row:has(input:checked) span { color:var(--ink-soft); text-decoration:line-through; }
+.pal-chip-list { display:flex; flex-wrap:wrap; gap:.4rem; }
+.pal-chip-list span { padding:.35rem .55rem; border:1px solid var(--line-soft); border-radius:.35rem; font-size:.72rem; }
+.inline-note-form { display:grid; gap:.55rem; }
+.inline-note-form textarea { min-height:5.5rem; }
+.context-note-list { margin-top:.8rem; border-top:1px solid var(--line); }
+.context-note { padding:.8rem 0; border-bottom:1px solid var(--line-soft); }
+.context-note > div { display:flex; justify-content:space-between; gap:1rem; }
+.context-note small,.muted-copy { color:var(--ink-soft); }
+.context-note p { margin:.4rem 0; color:var(--ink-muted); }
+.text-button { padding:0; border:0; background:none; color:var(--danger); font:inherit; font-size:.72rem; cursor:pointer; }
+@media (min-width:48rem) {
+  .guide-table-row { grid-template-columns:minmax(14rem,.65fr) 1fr; align-items:start; }
+  .inline-note-form { grid-template-columns:minmax(10rem,.45fr) 1fr auto; align-items:start; }
+  .inline-note-form textarea { min-height:2.75rem; }
+}
