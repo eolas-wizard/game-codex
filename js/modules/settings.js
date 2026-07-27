@@ -54,7 +54,7 @@ export const settingsModule = {
               <h3>Iteration</h3>
               <p>Journal shell, regional themes, notes, and bookmarks.</p>
             </div>
-            <strong>03</strong>
+            <strong>05</strong>
           </article>
         </div>
       </section>
@@ -67,6 +67,7 @@ export const settingsModule = {
         const mode = button.dataset.modeChoice;
         setMode(mode);
         document.documentElement.dataset.mode = mode;
+        document.dispatchEvent(new CustomEvent("eolas:appearance-changed"));
         refresh();
       });
     });
@@ -76,6 +77,7 @@ export const settingsModule = {
       setActiveRegion(region);
       document.documentElement.dataset.region = region;
       document.dispatchEvent(new CustomEvent("eolas:region-changed"));
+      refresh();
     });
   }
 };
