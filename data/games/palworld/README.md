@@ -1,6 +1,6 @@
 # Palworld Data
 
-This directory contains structured data for the Palworld implementation of Game Codex.
+This directory contains structured Palworld data for Eolas Companion.
 
-The production Pal dataset remains intentionally empty until a complete,
-verified schema and import source are ready.
+Production Pal records remain empty until the full verified schema and source
+workflow are established.

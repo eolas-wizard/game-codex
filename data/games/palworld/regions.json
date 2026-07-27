@@ -1,0 +1,46 @@
+{
+  "gameId": "palworld",
+  "version": "0.2.0",
+  "regions": [
+    {
+      "id": "windswept-hills",
+      "name": "Windswept Hills",
+      "theme": "windswept-hills"
+    },
+    {
+      "id": "bamboo-groves",
+      "name": "Bamboo Groves",
+      "theme": "bamboo-groves"
+    },
+    {
+      "id": "verdant-brook",
+      "name": "Verdant Brook",
+      "theme": "verdant-brook"
+    },
+    {
+      "id": "obsidian-mountain",
+      "name": "Obsidian Mountain",
+      "theme": "obsidian-mountain"
+    },
+    {
+      "id": "astral-mountains",
+      "name": "Astral Mountains",
+      "theme": "astral-mountains"
+    },
+    {
+      "id": "dessicated-desert",
+      "name": "Dessicated Desert",
+      "theme": "dessicated-desert"
+    },
+    {
+      "id": "sakurajima",
+      "name": "Sakurajima",
+      "theme": "sakurajima"
+    },
+    {
+      "id": "feybreak",
+      "name": "Feybreak",
+      "theme": "feybreak"
+    }
+  ]
+}

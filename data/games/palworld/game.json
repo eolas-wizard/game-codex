@@ -2,15 +2,16 @@
   "id": "palworld",
   "name": "Palworld",
   "companionName": "Eolas Companion",
-  "status": "development",
-  "appVersion": "0.1.0",
-  "dataVersion": "0.1.0",
+  "appVersion": "0.2.0",
+  "dataVersion": "0.2.0",
+  "experience": "field-journal",
   "features": {
-    "home": true,
+    "journal": true,
+    "regionalThemes": true,
+    "fieldNotes": true,
+    "bookmarks": true,
+    "worldGuide": true,
     "paldex": true,
-    "regions": true,
-    "bases": true,
-    "settings": true,
-    "completionTracking": false
+    "bases": true
   }
 }
