@@ -1,0 +1,35 @@
+{
+  "version": "0.5.0",
+  "guides": {
+    "windswept-hills": {
+      "name": "Windswept Hills",
+      "subtitle": "Starting region field pack",
+      "summary": "A practical opening-area guide for the Plateau of Beginnings and the surrounding hills. Use it to route early fast travel, prepare for the first Alpha encounters, and keep starter resources close.",
+      "levelRange": "1–15",
+      "fastTravel": [
+        {"id":"plateau","name":"Plateau of Beginnings","coordinates":"240, -513","note":"Primary starting point and the cleanest reset point for early gathering loops."},
+        {"id":"behemoth","name":"Grassy Behemoth Hills","coordinates":"176, -473","note":"Useful access point for Mammorest and nearby starter-resource routes."},
+        {"id":"ravine","name":"Ravine Entrance","coordinates":"-64, -423","note":"A western route into wider exploration and nearby cave searches."}
+      ],
+      "bosses": [
+        {"id":"chillet","name":"Chillet","coordinates":"172, -419","level":"11","note":"A strong first Alpha goal once you have better spheres, armor, and a reliable combat Pal."},
+        {"id":"mammorest","name":"Mammorest","coordinates":"189, -478","level":"38","note":"Visible early but intended for much later. Mark it now; do not treat proximity as readiness."}
+      ],
+      "resources": [
+        {"id":"wood-stone","name":"Wood and Stone","route":"Plateau loop","note":"Gather around the Plateau of Beginnings while unlocking the first technology tiers."},
+        {"id":"berries","name":"Red Berries","route":"Open grassland patches","note":"Keep a small food reserve before pushing away from the starting plateau."},
+        {"id":"pal-fluids","name":"Pal Fluids","route":"Water edges and Pengullet habitats","note":"Useful for early production structures; pair the search with nearby capture goals."},
+        {"id":"ore","name":"Ore","route":"Rocky rises and node clusters","note":"Flag promising nodes for a future mining base instead of carrying every stack home."}
+      ],
+      "objectives": [
+        {"id":"unlock-plateau","label":"Unlock Plateau of Beginnings fast travel"},
+        {"id":"unlock-behemoth","label":"Unlock Grassy Behemoth Hills fast travel"},
+        {"id":"unlock-ravine","label":"Unlock Ravine Entrance fast travel"},
+        {"id":"capture-starters","label":"Capture Lamball, Cattiva, Chikipi, Lifmunk, and Foxparks"},
+        {"id":"defeat-chillet","label":"Defeat or capture Alpha Chillet"},
+        {"id":"mark-base","label":"Mark one possible ore-focused base location"}
+      ],
+      "pals": ["Lamball","Cattiva","Chikipi","Lifmunk","Foxparks","Gumoss","Pengullet","Dinossom","Chillet","Mammorest"]
+    }
+  }
+}
