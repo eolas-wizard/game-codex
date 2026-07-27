@@ -345,6 +345,36 @@ button {
   }
 }
 
-
-/* Iteration 03 Journal Shell */
-.journal-cover{padding:3rem 0;border-bottom:2px solid var(--accent,#7b8b5a);} .section-title{font-family:Georgia,serif;letter-spacing:.08em;text-transform:uppercase;}
+.guide-nav a,
+.mobile-tabs a {
+  text-decoration: none;
+}
+.guide-nav a {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: .75rem;
+  padding-inline: .8rem;
+  border-radius: .75rem;
+  color: var(--ink-muted);
+  font-weight: 800;
+}
+.guide-nav a[aria-current="page"] {
+  background: color-mix(in srgb, var(--accent) 14%, var(--paper));
+  color: var(--accent-strong);
+}
+.mobile-tabs a {
+  display: flex;
+  min-width: 0;
+  min-height: 3.7rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .22rem;
+  border-radius: .75rem;
+  color: var(--ink-soft);
+}
+.mobile-tabs a[aria-current="page"] {
+  background: color-mix(in srgb, var(--accent) 14%, var(--paper));
+  color: var(--accent-strong);
+}

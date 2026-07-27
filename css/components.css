@@ -356,3 +356,32 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+.cover-actions { position: relative; z-index: 2; display:flex; flex-wrap:wrap; gap:.65rem; margin-top:1.25rem; }
+.chapter-heading { padding-bottom:.55rem; border-bottom:1px solid var(--line-soft); }
+.expedition-grid, .reference-grid { display:grid; gap:.8rem; }
+.status-card {
+  display:grid; grid-template-columns:2.5rem 1fr; gap:.8rem; align-items:center;
+  padding:1rem; border:1px solid var(--line-soft); border-radius:var(--radius-md);
+  background:color-mix(in srgb, var(--paper-raised) 94%, transparent);
+  color:inherit; text-align:left; cursor:pointer; box-shadow:var(--shadow);
+}
+.status-card:hover,.status-card:focus-visible { border-color:var(--accent); }
+.status-symbol { display:grid; width:2.5rem; height:2.5rem; place-items:center; border-radius:50%;
+  background:color-mix(in srgb, var(--accent) 14%, var(--paper)); color:var(--accent-strong); }
+.status-card small,.status-card strong,.status-card em { display:block; }
+.status-card small { color:var(--ink-soft); font-size:.65rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+.status-card strong { margin-top:.12rem; font-family:var(--font-display); font-size:1.1rem; }
+.status-card em { margin-top:.2rem; color:var(--ink-muted); font-size:.72rem; font-style:normal; }
+.reference-card { padding:1rem; border:1px solid var(--line-soft); border-radius:var(--radius-md);
+  background:color-mix(in srgb, var(--paper-raised) 94%, transparent); box-shadow:var(--shadow); }
+.reference-card h3 { margin:.2rem 0 .35rem; font-family:var(--font-display); }
+.reference-card p { margin:0; color:var(--ink-muted); font-size:.8rem; }
+.reference-label { color:var(--accent)!important; font-size:.62rem!important; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+.tag-row { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.8rem; }
+.tag-row span { padding:.28rem .48rem; border-radius:999px; background:var(--paper); color:var(--ink-soft); font-size:.64rem; font-weight:800; }
+.notes-spaced { margin-top:.8rem; }
+@media (min-width:42rem) {
+  .expedition-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .reference-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
