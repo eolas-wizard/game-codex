@@ -1,25 +1,9 @@
-# Game Codex
+# Eolas Companion — Prototype Reset
 
-**Play More. Research Less.**
+A simple, offline-first Palworld companion focused on quick lookup and player notes.
 
-Game Codex is the foundation for **Eolas Companion**, an offline-first field
-journal and strategy companion for Palworld.
+## Run
+Serve the repository root with any static web server, or publish through GitHub Pages.
 
-## Iteration 02
-
-This iteration rebuilds the product experience around:
-
-- A field-journal home screen
-- Regional identity and themes
-- Personal field notes
-- Bookmarks
-- Last-expedition context
-- Prima-style guidebook organization
-- Local persistence
-- Offline application-shell caching
-
-## Replace the repository contents
-
-Upload the contents of this ZIP to the repository root and replace matching files.
-
-GitHub Pages will republish from `main`.
+## Iteration 06
+This is a deliberate reset to the usable prototype direction. See `ITERATION-06.md`.

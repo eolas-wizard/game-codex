@@ -2,122 +2,35 @@
 <html lang="en" data-mode="dark" data-region="windswept-hills">
 <head>
   <meta charset="utf-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  >
-  <meta
-    name="description"
-    content="Eolas Companion — an offline-first Palworld field journal."
-  >
-  <meta name="theme-color" content="#182017">
-
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#18231d">
   <title>Eolas Companion</title>
-
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="stylesheet" href="./css/tokens.css">
   <link rel="stylesheet" href="./css/app.css">
   <link rel="stylesheet" href="./css/components.css">
-
-  <script type="module" src="./js/app.js"></script>
 </head>
-
 <body>
-  <a class="skip-link" href="#app-view">Skip to journal</a>
-
-  <div class="world-wash" aria-hidden="true"></div>
-
   <div class="app-shell">
-    <aside class="guide-rail" aria-label="Field guide">
-      <a class="journal-brand" href="#/home" data-route="home">
-        <span class="brand-sigil" aria-hidden="true">E</span>
-        <span>
-          <strong>Eolas</strong>
-          <small>Field Journal</small>
-        </span>
+    <header class="app-header">
+      <a class="brand" href="#/home" data-route="home">
+        <span class="brand-mark">E</span>
+        <span><strong>Eolas</strong><small>Palworld companion</small></span>
       </a>
+      <button id="quick-theme" class="icon-button" type="button" aria-label="Toggle reading mode">◐</button>
+    </header>
 
-      <nav class="guide-nav" aria-label="Primary navigation">
-        <a href="#/home" data-route="home">
-          <span aria-hidden="true">✦</span>
-          <span>Journal</span>
-        </a>
-        <a href="#/regions" data-route="regions">
-          <span aria-hidden="true">⌖</span>
-          <span>World</span>
-        </a>
-        <a href="#/paldex" data-route="paldex">
-          <span aria-hidden="true">◉</span>
-          <span>Paldex</span>
-        </a>
-        <a href="#/bases" data-route="bases">
-          <span aria-hidden="true">⌂</span>
-          <span>Bases</span>
-        </a>
-        <a href="#/settings" data-route="settings">
-          <span aria-hidden="true">⚙</span>
-          <span>Settings</span>
-        </a>
-      </nav>
-
-      <div class="rail-footer">
-        <span id="connection-status" class="connection-status" role="status">
-          Checking connection
-        </span>
-        <small>Iteration 04</small>
-      </div>
-    </aside>
-
-    <div class="journal-stage">
-      <header class="mobile-header">
-        <a class="journal-brand" href="#/home" data-route="home">
-          <span class="brand-sigil" aria-hidden="true">E</span>
-          <span>
-            <strong>Eolas</strong>
-            <small>Field Journal</small>
-          </span>
-        </a>
-
-        <a
-          class="region-chip"
-          id="region-shortcut"
-          href="#/regions"
-          data-route="regions"
-        >
-          <span class="region-dot" aria-hidden="true"></span>
-          <span id="active-region-label">Windswept Hills</span>
-        </a>
-      </header>
-
-      <main id="app-view" class="app-view" tabindex="-1"></main>
-    </div>
-
-    <nav class="mobile-tabs" aria-label="Primary navigation">
-      <a href="#/home" data-route="home">
-        <span aria-hidden="true">✦</span>
-        <small>Journal</small>
-      </a>
-      <a href="#/regions" data-route="regions">
-        <span aria-hidden="true">⌖</span>
-        <small>World</small>
-      </a>
-      <a href="#/paldex" data-route="paldex">
-        <span aria-hidden="true">◉</span>
-        <small>Paldex</small>
-      </a>
-      <a href="#/bases" data-route="bases">
-        <span aria-hidden="true">⌂</span>
-        <small>Bases</small>
-      </a>
-      <a href="#/settings" data-route="settings">
-        <span aria-hidden="true">⚙</span>
-        <small>Settings</small>
-      </a>
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="#/home" data-route="home">Home</a>
+      <a href="#/regions" data-route="regions">Regions</a>
+      <a href="#/paldex" data-route="paldex">Paldex</a>
+      <a href="#/bases" data-route="bases">Bases</a>
+      <a href="#/settings" data-route="settings">Settings</a>
     </nav>
+
+    <main id="app" tabindex="-1"></main>
   </div>
 
-  <noscript>
-    <div class="noscript-message">Eolas Companion requires JavaScript.</div>
-  </noscript>
+  <script type="module" src="./js/app.js"></script>
 </body>
 </html>
