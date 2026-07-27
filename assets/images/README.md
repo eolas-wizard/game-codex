@@ -1,5 +1,5 @@
 # Images
 
-Locally stored artwork, region imagery, and interface visuals belong here.
+Regional artwork, map assets, guide illustrations, and textures belong here.
 
-Asset licensing and source notes should be documented before publication.
+The current regional identity is CSS-driven until approved image assets are added.
