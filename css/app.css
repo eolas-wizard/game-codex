@@ -344,3 +344,7 @@ button {
     padding: 2rem clamp(2rem, 5vw, 4rem) 4rem;
   }
 }
+
+
+/* Iteration 03 Journal Shell */
+.journal-cover{padding:3rem 0;border-bottom:2px solid var(--accent,#7b8b5a);} .section-title{font-family:Georgia,serif;letter-spacing:.08em;text-transform:uppercase;}
