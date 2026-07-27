@@ -1,7 +1,3 @@
-# Iteration 03
-
-Journal Shell refresh baseline.
-
 # Game Codex
 
 **Play More. Research Less.**
