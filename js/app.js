@@ -42,8 +42,11 @@ function updateNavigation(route) {
 }
 
 function bindNavigation(router) {
-  document.querySelectorAll("[data-route]").forEach((button) => {
-    button.addEventListener("click", () => router.navigate(button.dataset.route));
+  document.querySelectorAll("[data-route]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      router.navigate(link.dataset.route);
+    });
   });
 }
 
