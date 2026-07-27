@@ -1,84 +1,53 @@
-import { readValue, writeValue } from "./storage.js";
+import { loadState, saveState } from "./storage.js";
 
-const DEFAULTS = {
+const DEFAULT_STATE = {
   mode: "dark",
   activeRegion: "windswept-hills",
   expeditionDay: 1,
-  notes: [
-    {
-      id: "welcome-note",
-      title: "Begin your field journal",
-      body: "Record a discovery, cave entrance, Alpha sighting, resource route, or anything worth returning to.",
-      contextType: "region",
-      contextId: "windswept-hills",
-      region: "windswept-hills",
-      createdAt: new Date().toISOString()
-    }
-  ],
-  bookmarks: [
-    {
-      id: "starter-bookmark",
-      title: "Windswept Hills",
-      detail: "Current expedition region",
-      type: "Region"
-    }
-  ],
-  regionProgress: {}
+  notes: [],
+  bookmarks: [],
+  completed: {}
 };
 
-const state = {
-  mode: readValue("mode", DEFAULTS.mode),
-  activeRegion: readValue("activeRegion", DEFAULTS.activeRegion),
-  expeditionDay: readValue("expeditionDay", DEFAULTS.expeditionDay),
-  notes: readValue("notes", DEFAULTS.notes),
-  bookmarks: readValue("bookmarks", DEFAULTS.bookmarks),
-  regionProgress: readValue("regionProgress", DEFAULTS.regionProgress)
-};
+let state = normalize(loadState(DEFAULT_STATE));
 
-export function getState() { return state; }
+export function getState() { return structuredClone(state); }
 
 export function setMode(mode) {
   state.mode = mode === "light" ? "light" : "dark";
-  writeValue("mode", state.mode);
+  persist();
 }
-
 export function setActiveRegion(region) {
   state.activeRegion = region;
-  writeValue("activeRegion", region);
+  persist();
 }
-
 export function addNote(note) {
-  state.notes.unshift(note);
-  writeValue("notes", state.notes);
+  state.notes.unshift({ contextType:"general", contextId:"general", ...note });
+  persist();
 }
-
 export function deleteNote(id) {
-  state.notes = state.notes.filter((note) => note.id !== id);
-  writeValue("notes", state.notes);
+  state.notes = state.notes.filter(n => n.id !== id);
+  persist();
 }
-
-export function notesForContext(contextType, contextId) {
-  return state.notes.filter((note) => {
-    if (note.contextType && note.contextId) {
-      return note.contextType === contextType && note.contextId === contextId;
-    }
-    return contextType === "region" && note.region === contextId;
-  });
+export function addBookmark(item) {
+  state.bookmarks.unshift(item);
+  persist();
 }
-
-export function toggleRegionObjective(regionId, objectiveId) {
-  const region = state.regionProgress[regionId] ?? {};
-  region[objectiveId] = !region[objectiveId];
-  state.regionProgress = { ...state.regionProgress, [regionId]: region };
-  writeValue("regionProgress", state.regionProgress);
-}
-
-export function addBookmark(bookmark) {
-  state.bookmarks.unshift(bookmark);
-  writeValue("bookmarks", state.bookmarks);
-}
-
 export function deleteBookmark(id) {
-  state.bookmarks = state.bookmarks.filter((bookmark) => bookmark.id !== id);
-  writeValue("bookmarks", state.bookmarks);
+  state.bookmarks = state.bookmarks.filter(item => item.id !== id);
+  persist();
+}
+export function toggleCompleted(id) {
+  state.completed[id] = !state.completed[id];
+  persist();
+}
+function persist() { saveState(state); }
+function normalize(value) {
+  return {
+    ...DEFAULT_STATE,
+    ...(value || {}),
+    notes: Array.isArray(value?.notes) ? value.notes : [],
+    bookmarks: Array.isArray(value?.bookmarks) ? value.bookmarks : [],
+    completed: value?.completed && typeof value.completed === "object" ? value.completed : {}
+  };
 }

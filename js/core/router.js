@@ -1,47 +1,24 @@
-const FALLBACK_ROUTE = "home";
-
-export function createRouter({ routes, outlet, onRouteChange }) {
-  function currentRoute() {
-    const route = window.location.hash.replace(/^#\/?/, "").trim();
-    return routes[route] ? route : FALLBACK_ROUTE;
+export function createRouter({ routes, defaultRoute, onRender }) {
+  let currentRoute = defaultRoute;
+  async function render(route) {
+    const safeRoute = routes[route] ? route : defaultRoute;
+    currentRoute = safeRoute;
+    const module = routes[safeRoute];
+    await onRender(safeRoute, {
+      ...module,
+      render: async () => module.render()
+    });
   }
-
+  async function renderCurrent() { await render(currentRoute); }
   function navigate(route) {
-    const safeRoute = routes[route] ? route : FALLBACK_ROUTE;
-    const hash = `#/${safeRoute}`;
-
-    if (window.location.hash === hash) {
-      render(safeRoute);
-    } else {
-      window.location.hash = hash;
-    }
+    const next = routes[route] ? route : defaultRoute;
+    if (location.hash !== `#/${next}`) location.hash = `#/${next}`;
+    else render(next);
   }
-
-  async function render(route = currentRoute()) {
-    const module = routes[route] ?? routes[FALLBACK_ROUTE];
-    try {
-      await module.beforeRender?.();
-      outlet.innerHTML = module.render();
-    } catch (error) {
-      console.error(error);
-      outlet.innerHTML = `<section class="page"><div class="empty-page"><h1>Guide unavailable</h1><p>The local region data could not be loaded. Refresh once while online so it can be cached for offline use.</p></div></section>`;
-    }
-    module.mount?.({ navigate, refresh: () => render(route) });
-    onRouteChange?.(route);
-    outlet.focus({ preventScroll: true });
-    window.scrollTo({ top: 0, behavior: "instant" });
+  function routeFromHash() { return location.hash.replace(/^#\/?/,"") || defaultRoute; }
+  function start() {
+    window.addEventListener("hashchange",()=>render(routeFromHash()));
+    render(routeFromHash());
   }
-
-  window.addEventListener("hashchange", () => render());
-
-  return {
-    navigate,
-    start() {
-      if (!window.location.hash) {
-        navigate(FALLBACK_ROUTE);
-      } else {
-        render();
-      }
-    }
-  };
+  return { start, navigate, renderCurrent };
 }
