@@ -1,28 +1,22 @@
 # Product Direction
 
-## Product
+## Product identity
 
-Eolas Companion is the first game-specific experience built within Game Codex.
+Eolas Companion is an offline-first field journal and strategy guide.
+
+It should feel like opening a trusted guide before returning to the world,
+not like opening a dashboard or administrative interface.
 
 ## Core promise
 
 > Play More. Research Less.
 
-## Audience
+## Experience pillars
 
-Eolas is an offline-first gaming codex for modern completionists.
-
-## Product principles
-
-Eolas should be:
-
-- Interactive
-- Offline-first
-- Mobile-first
-- Fast to consult
-- Regionally immersive
-- Useful for decisions
-- Clear about progress
-
-Eolas should not become a conventional wiki, a raw database browser, or
-a substitute for playing the game.
+- Field journal, not dashboard
+- Regional identity
+- Prima-style strategy-guide organization
+- World-first navigation
+- Layered information
+- Personal notes and bookmarks
+- Offline-first use

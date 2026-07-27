@@ -1,22 +1,24 @@
 # Module Plan
 
-## Module 01 — Foundation and navigation
+## Iteration 02 — Journal shell
 
-- Application shell
-- Responsive primary navigation
-- Home screen
-- Paldex shell
-- Regions shell
-- Bases shell
-- Settings
-- Theme persistence
-- Offline application shell
+- Field-journal home
+- Practical notes
+- Pal bookmarks
+- Base notes
+- Regional atmosphere
+- Light and dark reading modes
+- World-first guide navigation
+- Local persistence
+- Offline shell
 
-## Planned next modules
+## Next likely iteration
 
-1. Regional selector and regional themes
-2. Verified Paldex data model and import
-3. Paldex browse, search, and detail views
-4. Base planning and saved base network
-5. Completion tracking
-6. Installable app icons and offline update experience
+- Region detail page
+- Regional guide sections
+- Landmarks
+- Fast travel
+- Dungeons
+- Resources
+- Regional notes
+- Regional completion structure
