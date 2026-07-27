@@ -1,84 +1,138 @@
+import { getState, addNote, deleteNote } from "../core/state.js";
+import { getRegion } from "../core/regions.js";
+
 export const homeModule = {
   render() {
+    const state = getState();
+    const region = getRegion(state.activeRegion);
+
     return `
       <section class="page">
-        <article class="hero-card">
-          <p class="hero-eyebrow">Palworld companion</p>
-          <h1 class="hero-title">Play more.<br>Research less.</h1>
-          <p class="hero-copy">
-            Eolas keeps the decisions, discoveries, and planning tools you
-            need close at hand—without turning your play session into homework.
+        <article class="journal-cover">
+          <p class="cover-overline">Palworld field journal</p>
+          <h1 class="cover-title">Continue the expedition.</h1>
+          <p class="cover-copy">
+            Your notes, routes, discoveries, and guidebook stay together so
+            research supports the journey instead of interrupting it.
           </p>
-          <div class="hero-actions">
-            <button class="button button-primary" type="button" data-go="paldex">
-              Continue journey
-            </button>
-            <button class="button" type="button" data-go="regions">
-              Explore regions
-            </button>
+          <div class="cover-meta">
+            <span>${region.name}</span>
+            <span>Expedition day ${state.expeditionDay}</span>
+            <span>${state.notes.length} field ${state.notes.length === 1 ? "note" : "notes"}</span>
           </div>
         </article>
 
         <section class="section">
           <div class="section-heading">
-            <h2>Your journey</h2>
-            <p>Local to this device</p>
+            <h2>Field notes</h2>
+            <small>Saved on this device</small>
           </div>
-          <div class="stats-grid">
-            <article class="stat-card">
-              <h3>Paldex</h3>
-              <p class="stat-value">0%</p>
-              <p class="stat-caption">Completion tracking arrives in a later module.</p>
-            </article>
-            <article class="stat-card">
-              <h3>Regions</h3>
-              <p class="stat-value">—</p>
-              <p class="stat-caption">Regional discovery data is not loaded yet.</p>
-            </article>
-            <article class="stat-card">
-              <h3>Bases</h3>
-              <p class="stat-value">0</p>
-              <p class="stat-caption">No base plans saved on this device.</p>
-            </article>
-            <article class="stat-card">
-              <h3>Status</h3>
-              <p class="stat-value">Ready</p>
-              <p class="stat-caption">Foundation module is active.</p>
-            </article>
+
+          <form id="note-form" class="editor-sheet">
+            <label>
+              Note title
+              <input name="title" maxlength="80" placeholder="Cave north of the ruins" required>
+            </label>
+            <label>
+              Observation
+              <textarea name="body" maxlength="500" placeholder="What did you discover or want to remember?" required></textarea>
+            </label>
+            <button class="button button-primary" type="submit">Add field note</button>
+          </form>
+
+          <div class="notes-list" style="margin-top: .8rem;">
+            ${state.notes.map(noteCard).join("")}
           </div>
         </section>
 
         <section class="section">
           <div class="section-heading">
-            <h2>Choose your next task</h2>
+            <h2>Open the guidebook</h2>
           </div>
-          <div class="card-grid">
-            ${actionCard("paldex", "◉", "Find a Pal", "Search, browse, and eventually track Pal discoveries.")}
-            ${actionCard("regions", "◇", "Explore a Region", "Open the regional layer for location-based decisions.")}
-            ${actionCard("bases", "⌂", "Plan a Base", "Prepare a base network and record useful locations.")}
-            ${actionCard("settings", "⚙", "Adjust Eolas", "Choose appearance and review app information.")}
+          <div class="journal-grid">
+            ${guideCard("regions", "⌖", "World Guide", "Regions, landmarks, routes, dungeons, and discoveries.")}
+            ${guideCard("paldex", "◉", "Paldex", "Where to find, uses, drops, skills, strategy, and notes.")}
+            ${guideCard("bases", "⌂", "Base Notes", "Locations, production roles, resources, and network planning.")}
+            ${guideCard("settings", "⚙", "Journal Settings", "Appearance, regional atmosphere, and build details.")}
           </div>
         </section>
       </section>
     `;
   },
 
-  mount({ navigate }) {
+  mount({ navigate, refresh }) {
     document.querySelectorAll("[data-go]").forEach((button) => {
       button.addEventListener("click", () => navigate(button.dataset.go));
+    });
+
+    const form = document.querySelector("#note-form");
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const state = getState();
+
+      addNote({
+        id: crypto.randomUUID?.() ?? String(Date.now()),
+        title: String(data.get("title")).trim(),
+        body: String(data.get("body")).trim(),
+        region: state.activeRegion,
+        createdAt: new Date().toISOString()
+      });
+
+      refresh();
+    });
+
+    document.querySelectorAll("[data-delete-note]").forEach((button) => {
+      button.addEventListener("click", () => {
+        deleteNote(button.dataset.deleteNote);
+        refresh();
+      });
     });
   }
 };
 
-function actionCard(route, icon, title, description) {
+function guideCard(route, symbol, title, description) {
   return `
-    <button class="action-card" type="button" data-go="${route}">
-      <span class="action-icon" aria-hidden="true">${icon}</span>
+    <button class="guide-card" type="button" data-go="${route}">
+      <span class="guide-symbol" aria-hidden="true">${symbol}</span>
       <span>
         <h3>${title}</h3>
         <p>${description}</p>
       </span>
-      <span class="action-arrow" aria-hidden="true">›</span>
+      <span class="card-arrow" aria-hidden="true">›</span>
     </button>
   `;
+}
+
+function noteCard(note) {
+  const region = getRegion(note.region);
+  const date = new Date(note.createdAt).toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric"
+  });
+
+  return `
+    <article class="note-card">
+      <h3>${escapeHtml(note.title)}</h3>
+      <p>${escapeHtml(note.body)}</p>
+      <div class="note-meta">
+        <span>${region.name}</span>
+        <span>${date}</span>
+      </div>
+      <div class="inline-actions">
+        <button class="button button-danger" type="button" data-delete-note="${note.id}">
+          Delete
+        </button>
+      </div>
+    </article>
+  `;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
