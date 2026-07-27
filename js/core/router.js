@@ -1,27 +1,26 @@
-const DEFAULT_ROUTE = "home";
+const FALLBACK_ROUTE = "home";
 
 export function createRouter({ routes, outlet, onRouteChange }) {
-  function getRouteFromHash() {
-    const candidate = window.location.hash.replace(/^#\/?/, "").trim();
-    return candidate && routes[candidate] ? candidate : DEFAULT_ROUTE;
+  function currentRoute() {
+    const route = window.location.hash.replace(/^#\/?/, "").trim();
+    return routes[route] ? route : FALLBACK_ROUTE;
   }
 
   function navigate(route) {
-    const safeRoute = routes[route] ? route : DEFAULT_ROUTE;
-    const nextHash = `#/${safeRoute}`;
+    const safeRoute = routes[route] ? route : FALLBACK_ROUTE;
+    const hash = `#/${safeRoute}`;
 
-    if (window.location.hash === nextHash) {
+    if (window.location.hash === hash) {
       render(safeRoute);
-      return;
+    } else {
+      window.location.hash = hash;
     }
-
-    window.location.hash = nextHash;
   }
 
-  function render(route = getRouteFromHash()) {
-    const module = routes[route] ?? routes[DEFAULT_ROUTE];
+  function render(route = currentRoute()) {
+    const module = routes[route] ?? routes[FALLBACK_ROUTE];
     outlet.innerHTML = module.render();
-    module.mount?.({ navigate });
+    module.mount?.({ navigate, refresh: () => render(route) });
     onRouteChange?.(route);
     outlet.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -30,13 +29,13 @@ export function createRouter({ routes, outlet, onRouteChange }) {
   window.addEventListener("hashchange", () => render());
 
   return {
+    navigate,
     start() {
       if (!window.location.hash) {
-        navigate(DEFAULT_ROUTE);
+        navigate(FALLBACK_ROUTE);
       } else {
         render();
       }
-    },
-    navigate
+    }
   };
 }
