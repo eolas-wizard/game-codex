@@ -1,1 +1,16 @@
-{"id":"palworld","companionName":"Eolas Companion"}
+{
+  "id": "palworld",
+  "name": "Palworld",
+  "companionName": "Eolas Companion",
+  "status": "development",
+  "appVersion": "0.1.0",
+  "dataVersion": "0.1.0",
+  "features": {
+    "home": true,
+    "paldex": true,
+    "regions": true,
+    "bases": true,
+    "settings": true,
+    "completionTracking": false
+  }
+}
