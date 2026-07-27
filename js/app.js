@@ -1,1 +1,1 @@
-
+console.log('Eolas Companion');
