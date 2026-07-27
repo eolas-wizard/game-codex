@@ -1,101 +1,42 @@
-import { getState, addBookmark, deleteBookmark } from "../core/state.js";
+import { getState, addBookmark, deleteBookmark, addNote, deleteNote } from "../core/state.js";
 
 export const basesModule = {
-  render() {
-    const state = getState();
-    const bases = state.bookmarks.filter((item) => item.type === "Base");
-
-    return `
-      <section class="page">
-        <header class="page-header">
-          <p class="page-kicker">Expedition planning</p>
-          <h1 class="page-title">Bases</h1>
-          <p class="page-description">
-            Save candidate locations and the reason each place matters before
-            the full production and network planner arrives.
-          </p>
-        </header>
-
-        <form id="base-form" class="editor-sheet">
-          <label>
-            Base name
-            <input name="title" maxlength="80" placeholder="Coal outpost" required>
-          </label>
-          <label>
-            Purpose or location
-            <input name="detail" maxlength="140" placeholder="Coal, ore, sulfur, travel route…">
-          </label>
-          <button class="button button-primary" type="submit">Save base note</button>
-        </form>
-
-        <section class="section">
-          <div class="section-heading">
-            <h2>Base notes</h2>
-            <small>${bases.length}</small>
-          </div>
-          <div class="bookmark-list">
-            ${
-              bases.length
-                ? bases.map(baseCard).join("")
-                : `
-                  <article class="empty-page">
-                    <div class="empty-symbol" aria-hidden="true">⌂</div>
-                    <h2>No base notes</h2>
-                    <p>Save a possible location, its purpose, or the resource route it supports.</p>
-                  </article>
-                `
-            }
-          </div>
-        </section>
-      </section>
-    `;
+  render(){
+    const state=getState();
+    const bases=state.bookmarks.filter(x=>x.type==="Base");
+    return `<section class="page">
+      <header class="page-header"><p class="page-kicker">Base planner</p><h1 class="page-title">Save the locations worth testing.</h1><p class="page-description">Keep the planner lightweight: location, purpose, resources, and your own notes.</p></header>
+      <form id="base-form" class="editor">
+        <label>Name<input name="title" placeholder="Ore base" required></label>
+        <label>Location and purpose<textarea name="detail" placeholder="Coordinates, nearby resources, transport role…" required></textarea></label>
+        <button class="button button-primary">Save base</button>
+      </form>
+      <div class="cards two">
+        ${bases.length?bases.map(base=>baseCard(base,state)).join(""):`<div class="empty">No base locations saved.</div>`}
+      </div>
+    </section>`;
   },
-
-  mount({ refresh }) {
-    const form = document.querySelector("#base-form");
-    form?.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const data = new FormData(form);
-
-      addBookmark({
-        id: crypto.randomUUID?.() ?? String(Date.now()),
-        title: String(data.get("title")).trim(),
-        detail: String(data.get("detail")).trim() || "Saved base location",
-        type: "Base"
-      });
-
+  mount({refresh}){
+    document.querySelector("#base-form")?.addEventListener("submit",event=>{
+      event.preventDefault(); const d=new FormData(event.currentTarget);
+      addBookmark({id:crypto.randomUUID?.()??String(Date.now()),title:String(d.get("title")).trim(),detail:String(d.get("detail")).trim(),type:"Base"});
       refresh();
     });
-
-    document.querySelectorAll("[data-delete-base]").forEach((button) => {
-      button.addEventListener("click", () => {
-        deleteBookmark(button.dataset.deleteBase);
-        refresh();
-      });
-    });
+    document.querySelectorAll(".base-note-form").forEach(form=>form.addEventListener("submit",event=>{
+      event.preventDefault(); const d=new FormData(form);
+      addNote({id:crypto.randomUUID?.()??String(Date.now()),title:String(d.get("title")).trim(),body:String(d.get("body")).trim(),region:getState().activeRegion,contextType:"base",contextId:form.dataset.base,createdAt:new Date().toISOString()});
+      refresh();
+    }));
+    document.querySelectorAll("[data-delete-base]").forEach(el=>el.addEventListener("click",()=>{deleteBookmark(el.dataset.deleteBase);refresh()}));
+    document.querySelectorAll("[data-delete-note]").forEach(el=>el.addEventListener("click",()=>{deleteNote(el.dataset.deleteNote);refresh()}));
   }
 };
-
-function baseCard(item) {
-  return `
-    <article class="bookmark-card">
-      <h3>${escapeHtml(item.title)}</h3>
-      <p>${escapeHtml(item.detail)}</p>
-      <div class="bookmark-meta"><span>Base</span></div>
-      <div class="inline-actions">
-        <button class="button button-danger" type="button" data-delete-base="${item.id}">
-          Remove
-        </button>
-      </div>
-    </article>
-  `;
+function baseCard(base,state){
+ const notes=state.notes.filter(n=>n.contextType==="base"&&n.contextId===base.id);
+ return `<article class="base-card"><h3>${esc(base.title)}</h3><p>${esc(base.detail)}</p>
+ <details><summary>My notes (${notes.length})</summary>
+ <form class="editor base-note-form" data-base="${base.id}"><label>Title<input name="title" required></label><label>Details<textarea name="body" required></textarea></label><button class="button button-primary">Save note</button></form>
+ <div class="cards">${notes.map(n=>`<article class="note-card"><h3>${esc(n.title)}</h3><p>${esc(n.body)}</p><button class="button button-danger" data-delete-note="${n.id}">Delete</button></article>`).join("")}</div>
+ </details><button class="button button-danger" data-delete-base="${base.id}">Remove base</button></article>`;
 }
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
+function esc(v){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
