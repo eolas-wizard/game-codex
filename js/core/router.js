@@ -17,9 +17,15 @@ export function createRouter({ routes, outlet, onRouteChange }) {
     }
   }
 
-  function render(route = currentRoute()) {
+  async function render(route = currentRoute()) {
     const module = routes[route] ?? routes[FALLBACK_ROUTE];
-    outlet.innerHTML = module.render();
+    try {
+      await module.beforeRender?.();
+      outlet.innerHTML = module.render();
+    } catch (error) {
+      console.error(error);
+      outlet.innerHTML = `<section class="page"><div class="empty-page"><h1>Guide unavailable</h1><p>The local region data could not be loaded. Refresh once while online so it can be cached for offline use.</p></div></section>`;
+    }
     module.mount?.({ navigate, refresh: () => render(route) });
     onRouteChange?.(route);
     outlet.focus({ preventScroll: true });
