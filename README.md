@@ -2,47 +2,24 @@
 
 **Play More. Research Less.**
 
-Game Codex is an offline-first gaming codex for modern completionists.
+Game Codex is the foundation for **Eolas Companion**, an offline-first field
+journal and strategy companion for Palworld.
 
-Its first implementation is **Eolas Companion**, a mobile-first Palworld
-companion designed to reduce research friction and return players to the game.
+## Iteration 02
 
-## Current module
+This iteration rebuilds the product experience around:
 
-**Module 01 — Foundation and Navigation**
+- A field-journal home screen
+- Regional identity and themes
+- Personal field notes
+- Bookmarks
+- Last-expedition context
+- Prima-style guidebook organization
+- Local persistence
+- Offline application-shell caching
 
-Included screens:
+## Replace the repository contents
 
-- Home
-- Paldex
-- Regions
-- Bases
-- Settings
+Upload the contents of this ZIP to the repository root and replace matching files.
 
-## Repository structure
-
-```text
-game-codex/
-├── assets/
-│   ├── icons/
-│   └── images/
-├── css/
-│   ├── app.css
-│   └── components.css
-├── data/
-│   └── games/
-│       └── palworld/
-├── docs/
-├── js/
-│   ├── core/
-│   ├── modules/
-│   └── app.js
-├── index.html
-├── manifest.webmanifest
-└── service-worker.js
-```
-
-## Development approach
-
-Each module must leave the published app in a usable state. Game data,
-presentation, application behavior, and local assets remain separate.
+GitHub Pages will republish from `main`.

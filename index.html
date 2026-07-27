@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-mode="dark" data-region="windswept-hills">
 <head>
   <meta charset="utf-8">
   <meta
@@ -8,13 +8,14 @@
   >
   <meta
     name="description"
-    content="Eolas Companion — an offline-first Palworld codex for modern completionists."
+    content="Eolas Companion — an offline-first Palworld field journal."
   >
-  <meta name="theme-color" content="#111714">
+  <meta name="theme-color" content="#182017">
 
   <title>Eolas Companion</title>
 
   <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./css/tokens.css">
   <link rel="stylesheet" href="./css/app.css">
   <link rel="stylesheet" href="./css/components.css">
 
@@ -22,59 +23,101 @@
 </head>
 
 <body>
-  <a class="skip-link" href="#app-view">Skip to content</a>
+  <a class="skip-link" href="#app-view">Skip to journal</a>
 
-  <div class="app-frame">
-    <header class="topbar">
-      <button
-        class="brand-button"
-        type="button"
-        data-route="home"
-        aria-label="Open Eolas home"
-      >
-        <span class="brand-mark" aria-hidden="true">E</span>
+  <div class="world-wash" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <aside class="guide-rail" aria-label="Field guide">
+      <button class="journal-brand" type="button" data-route="home">
+        <span class="brand-sigil" aria-hidden="true">E</span>
         <span>
-          <span class="brand-name">Eolas</span>
-          <span class="brand-product">Palworld Companion</span>
+          <strong>Eolas</strong>
+          <small>Field Journal</small>
         </span>
       </button>
 
-      <div class="status-pill" id="connection-status" role="status">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span>Checking</span>
+      <nav class="guide-nav" aria-label="Primary navigation">
+        <button type="button" data-route="home">
+          <span aria-hidden="true">✦</span>
+          <span>Journal</span>
+        </button>
+        <button type="button" data-route="regions">
+          <span aria-hidden="true">⌖</span>
+          <span>World</span>
+        </button>
+        <button type="button" data-route="paldex">
+          <span aria-hidden="true">◉</span>
+          <span>Paldex</span>
+        </button>
+        <button type="button" data-route="bases">
+          <span aria-hidden="true">⌂</span>
+          <span>Bases</span>
+        </button>
+        <button type="button" data-route="settings">
+          <span aria-hidden="true">⚙</span>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="rail-footer">
+        <span id="connection-status" class="connection-status" role="status">
+          Checking connection
+        </span>
+        <small>Iteration 02</small>
       </div>
-    </header>
+    </aside>
 
-    <main id="app-view" class="app-view" tabindex="-1"></main>
+    <div class="journal-stage">
+      <header class="mobile-header">
+        <button class="journal-brand" type="button" data-route="home">
+          <span class="brand-sigil" aria-hidden="true">E</span>
+          <span>
+            <strong>Eolas</strong>
+            <small>Field Journal</small>
+          </span>
+        </button>
 
-    <nav class="bottom-nav" aria-label="Primary navigation">
-      <button class="nav-item" type="button" data-route="home">
-        <span class="nav-icon" aria-hidden="true">⌂</span>
-        <span>Home</span>
+        <button
+          class="region-chip"
+          id="region-shortcut"
+          type="button"
+          data-route="regions"
+        >
+          <span class="region-dot" aria-hidden="true"></span>
+          <span id="active-region-label">Windswept Hills</span>
+        </button>
+      </header>
+
+      <main id="app-view" class="app-view" tabindex="-1"></main>
+    </div>
+
+    <nav class="mobile-tabs" aria-label="Primary navigation">
+      <button type="button" data-route="home">
+        <span aria-hidden="true">✦</span>
+        <small>Journal</small>
       </button>
-      <button class="nav-item" type="button" data-route="paldex">
-        <span class="nav-icon" aria-hidden="true">◉</span>
-        <span>Paldex</span>
+      <button type="button" data-route="regions">
+        <span aria-hidden="true">⌖</span>
+        <small>World</small>
       </button>
-      <button class="nav-item" type="button" data-route="regions">
-        <span class="nav-icon" aria-hidden="true">◇</span>
-        <span>Regions</span>
+      <button type="button" data-route="paldex">
+        <span aria-hidden="true">◉</span>
+        <small>Paldex</small>
       </button>
-      <button class="nav-item" type="button" data-route="bases">
-        <span class="nav-icon" aria-hidden="true">⌂</span>
-        <span>Bases</span>
+      <button type="button" data-route="bases">
+        <span aria-hidden="true">⌂</span>
+        <small>Bases</small>
       </button>
-      <button class="nav-item" type="button" data-route="settings">
-        <span class="nav-icon" aria-hidden="true">⚙</span>
-        <span>Settings</span>
+      <button type="button" data-route="settings">
+        <span aria-hidden="true">⚙</span>
+        <small>Settings</small>
       </button>
     </nav>
   </div>
 
   <noscript>
-    <div class="noscript-message">
-      Eolas Companion requires JavaScript to run.
-    </div>
+    <div class="noscript-message">Eolas Companion requires JavaScript.</div>
   </noscript>
 </body>
 </html>

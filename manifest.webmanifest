@@ -1,13 +1,13 @@
 {
   "name": "Eolas Companion",
   "short_name": "Eolas",
-  "description": "An offline-first Palworld codex for modern completionists.",
+  "description": "An offline-first Palworld field journal.",
   "id": "./",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#111714",
-  "theme_color": "#111714",
+  "background_color": "#182017",
+  "theme_color": "#182017",
   "orientation": "any",
   "categories": [
     "games",
