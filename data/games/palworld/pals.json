@@ -1,6 +1,65 @@
-{
-  "gameId": "palworld",
-  "version": "0.2.0",
-  "status": "schema-pending",
-  "pals": []
-}
+[
+  {
+    "id": "lamball",
+    "name": "Lamball",
+    "number": "001",
+    "type": "Neutral",
+    "where": "Windswept Hills",
+    "use": "Early wool and ranch utility",
+    "drops": "Wool, Lamball Mutton"
+  },
+  {
+    "id": "cattiva",
+    "name": "Cattiva",
+    "number": "002",
+    "type": "Neutral",
+    "where": "Windswept Hills",
+    "use": "Early carrying support",
+    "drops": "Red Berries"
+  },
+  {
+    "id": "chikipi",
+    "name": "Chikipi",
+    "number": "003",
+    "type": "Neutral",
+    "where": "Windswept Hills",
+    "use": "Egg production",
+    "drops": "Egg, Chikipi Poultry"
+  },
+  {
+    "id": "foxparks",
+    "name": "Foxparks",
+    "number": "005",
+    "type": "Fire",
+    "where": "Windswept Hills",
+    "use": "Early fire work and combat",
+    "drops": "Leather, Flame Organ"
+  },
+  {
+    "id": "lifmunk",
+    "name": "Lifmunk",
+    "number": "004",
+    "type": "Grass",
+    "where": "Windswept Hills",
+    "use": "Planting and early handiwork",
+    "drops": "Berry Seeds, Low Grade Medical Supplies"
+  },
+  {
+    "id": "pengullet",
+    "name": "Pengullet",
+    "number": "010",
+    "type": "Water / Ice",
+    "where": "Windswept Hills coast",
+    "use": "Watering and cooling",
+    "drops": "Pal Fluids, Ice Organ"
+  },
+  {
+    "id": "nitewing",
+    "name": "Nitewing",
+    "number": "038",
+    "type": "Neutral",
+    "where": "Open fields and cliffs",
+    "use": "Early flying mount",
+    "drops": "Leather"
+  }
+]
