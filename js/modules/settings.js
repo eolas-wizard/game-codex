@@ -54,7 +54,7 @@ export const settingsModule = {
               <h3>Iteration</h3>
               <p>Journal shell, regional themes, notes, and bookmarks.</p>
             </div>
-            <strong>02</strong>
+            <strong>03</strong>
           </article>
         </div>
       </section>
